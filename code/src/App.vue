@@ -1,6 +1,5 @@
 <script setup>
-import { ref, reactive, onMounted, watch } from "vue";
-import AutoNumeric from "autonumeric";
+import { ref, reactive, watch } from "vue";
 
 const isSubmitted = ref(false);
 const isValidated = ref(false);
@@ -23,17 +22,25 @@ const errors = reactive({
   totalRepayments: "",
 });
 
-let autoNumericInstance = null;
+function handleAmountInput(event) {
+  const input = event.target;
+  const rawValue = input.value.replace(/[^0-9.]/g, "");
 
-onMounted(() => {
-  autoNumericInstance = new AutoNumeric("#amount", {
-    allowDecimalPadding: false,
-  });
-});
+  if (rawValue.includes(".")) {
+    calculatorData.amount = parseFloat(rawValue) || null;
+  } else {
+    calculatorData.amount = parseInt(rawValue) || null;
+  }
 
-function handleAmountInput() {
-  const rawValue = autoNumericInstance.getNumber();
-  calculatorData.amount = parseFloat(rawValue);
+  const formattedValue = rawValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  input.value = formattedValue;
+}
+
+function handleTermInput(event) {
+  const input = event.target;
+  const rawValue = input.value.replace(/[^0-9]/g, "");
+  calculatorData.term = rawValue ? parseInt(rawValue, 10) : null;
+  input.value = rawValue;
 }
 
 function calculateMortgage() {
@@ -98,9 +105,8 @@ function submitForm() {
 
 function clearAll() {
   Object.keys(calculatorData).forEach((data) => (calculatorData[data] = null));
-  if (autoNumericInstance) {
-    autoNumericInstance.set("");
-  }
+  const amountInput = document.getElementById("amount");
+  if (amountInput) amountInput.value = "";
   isSubmitted.value = false;
   isValidated.value = false;
 }
@@ -150,6 +156,7 @@ watch(
                 id="term"
                 type="number"
                 v-model="calculatorData.term"
+                @input="handleTermInput"
               />
               <span class="sufix" :class="{ 'error-prefix-sufix': isSubmitted && errors.term }">years</span>
             </div>
@@ -612,6 +619,7 @@ section {
 
 .totalRepay h3 {
   color: hsl(0, 0%, 100%);
+  font-size: 1.5rem;
   margin: 0;
   margin-bottom: 20px;
 }
