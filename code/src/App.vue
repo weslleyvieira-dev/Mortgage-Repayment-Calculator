@@ -223,7 +223,7 @@ watch(
         <h1>Results shown here</h1>
 
         <p>
-          Complete the form and click “calculate repayments” to <br />
+          Complete the form and click “calculate repayments” to
           see what your monthly repayments would be.
         </p>
       </section>
@@ -232,7 +232,8 @@ watch(
         <div class="results-intro">
           <h1>Your results</h1>
           <p>
-            Your results are shown below based on the information you provided. To adjust the results, edit the form and click “calculate repayments” again.
+            Your results are shown below based on the information you provided. 
+            To adjust the results, edit the form and click “calculate repayments” again.
           </p>
         </div>
 
@@ -257,8 +258,8 @@ body {
   background-color: hsl(202, 86%, 94%);
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 
 @font-face {
@@ -278,6 +279,7 @@ body {
 
 * {
   font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1rem;
 }
 </style>
 
@@ -285,8 +287,8 @@ body {
 main {
   display: flex;
   flex-direction: row;
-  height: 100vh;
-  width: 100vw;
+  height: 100dvh;
+  width: 100dvw;
   justify-content: center;
   align-items: center;
 }
@@ -295,13 +297,13 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 60vh;
-  width: 28vw;
+  height: clamp(500px, calc(57% + 1vh), 700px);
+  width: clamp(500px, calc(29% + 1vw), 50%);
   background-color: hsl(0, 0%, 100%);
   border-radius: 20px 20px 0 20px;
   resize: none;
   box-sizing: border-box;
-  padding: 0 120px 0 40px;
+  padding: 1% 7% 0 2%;
 }
 
 .top {
@@ -315,7 +317,7 @@ form {
 }
 
 .top h1 {
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .top p {
@@ -336,8 +338,9 @@ label {
 }
 
 input {
-  font-size: 16px;
   font-weight: 500;
+  width: 100%;
+  height: 90%;
 }
 
 .amount-box {
@@ -506,8 +509,8 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 5vh;
   min-height: 5vh;
+  height: 5vh;
   width: 75%;
   border: none;
   background-color: hsl(61, 70%, 52%);
@@ -522,8 +525,8 @@ input {
   border: none;
   outline: none;
   background-color: transparent;
-  font-size: 16px;
   cursor: pointer;
+  width: min-content;
 }
 
 .submit-button:hover {
@@ -541,14 +544,14 @@ section {
   justify-content: center;
   align-items: center;
   margin: 0;
-  height: 60vh;
-  width: 25vw;
+  height: clamp(500px, calc(57% + 1vh), 700px);
+  width: clamp(400px, calc(25% + 1vw), 40%);
   background-color: hsl(202, 55%, 16%);
   border-radius: 0 20px 20px 60px;
   position: relative;
   right: 4vw;
   z-index: 2;
-  padding: 0 30px;
+  padding: 30px;
   resize: none;
   box-sizing: border-box;
 }
@@ -559,6 +562,7 @@ section {
 
 .results h1 {
   color: hsl(0, 0%, 100%);
+  font-size: 1.5rem;
 }
 
 .results p {
@@ -575,7 +579,7 @@ section {
   border-radius: 7px;
   width: 100%;
   height: 30vh;
-  margin: 0 auto 70px;
+  margin: 0 auto 5vh;
   resize: none;
   box-sizing: border-box;
   padding: 0 35px;
@@ -587,7 +591,7 @@ section {
   flex-direction: column;
   background-color: transparent;
   width: 100%;
-  padding: 25px 0;
+  padding: 20px 0;
 }
 
 .monthlyRepay p {
@@ -596,7 +600,7 @@ section {
 
 .monthlyRepay h2 {
   color: hsl(61, 70%, 52%);
-  font-size: 60px;
+  font-size: 4rem;
   padding: 0;
   margin: 0;
 }
@@ -618,10 +622,6 @@ section {
   align-items: center;
 }
 
-.no-results img {
-  width: 40%;
-}
-
 .no-results h1 {
   color: hsl(0, 0%, 100%);
 }
@@ -629,6 +629,12 @@ section {
 .no-results p {
   color: hsl(203, 41%, 72%);
   text-align: center;
+}
+
+.no-results img {
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
 }
 
 input[type="number"] {
@@ -669,5 +675,99 @@ input[type="number"]::-webkit-outer-spin-button {
 .error-prefix-sufix {
   background-color: hsl(4, 69%, 50%) !important;
   color: hsl(0, 0%, 100%) !important;
+}
+
+@media (max-width: 1024px) {
+  main {
+    flex-direction: column;
+    height: auto;
+    padding: 0;
+  }
+
+  form, section {
+    width: 100%;
+    border-radius: 0;
+    margin: 0;
+  }
+
+  form {
+    padding: 30px 25px 0;
+    height: auto;
+  }
+
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+    margin-bottom: 1.7rem;
+    top: 0;
+  }
+
+  .top h1, .top p {
+    margin: 0;
+  }
+
+  .side {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .radio-container, .submit, .prefix, .sufix {
+    font-weight: 700;
+  }
+
+  .submit-button {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    flex-direction: row;
+  }
+
+  .radio-container {
+    height: auto;
+    padding: 15px;
+  }
+
+  section {
+    position: inherit;
+    height: auto;
+    padding: 15px;
+  }
+
+  .result-box {
+    height: auto;
+    margin-bottom: 10px;
+    padding: 15px;
+  }
+
+  .results-intro {
+    margin-bottom: 10px;
+  }
+
+  .monthlyRepay h2 {
+    font-size: 2rem;
+  }
+
+  .results h1, .results h3, 
+  .no-results h1 {
+    font-size: 1.3rem;
+  }
+
+  .monthlyRepay {
+    padding-top: 0;
+  }
+
+  .totalRepay {
+    padding: 5px 0;
+  }
+
+  .results h3 {
+    margin-bottom: 0;
+  }
+
+  .results p,
+  .no-results p {
+    font-size: 0.9rem;
+  }
 }
 </style>
