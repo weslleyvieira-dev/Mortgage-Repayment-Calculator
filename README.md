@@ -16,19 +16,24 @@ Users should be able to:
 
 ### Screenshot
 - PC
+
 ![PC](./Screenshot%20-%20PC.png)
 
-<!-- ### Links
+- Mobile
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com) -->
+![Mobile](./Screenshot%20-%20Mobile.png)
+
+### Links
+
+- Solution URL: [GitHub](https://github.com/weslleyvieira-dev/Mortgage-Repayment-Calculator)
+- Live Site URL: [Vercel](https://mortgage-repayment-calculator-peach.vercel.app/)
 
 ### Built with
 
+- Vue.js 3
 - HTML5
 - CSS
 - JavaScript
-- Vue.js 3
 
 ## Author
 
