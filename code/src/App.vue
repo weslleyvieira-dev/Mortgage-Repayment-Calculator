@@ -32,7 +32,8 @@ onMounted(() => {
 });
 
 function handleAmountInput() {
-  calculatorData.amount = autoNumericInstance.getNumber();
+  const rawValue = autoNumericInstance.getNumber();
+  calculatorData.amount = parseFloat(rawValue);
 }
 
 function calculateMortgage() {
