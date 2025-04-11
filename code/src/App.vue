@@ -125,8 +125,8 @@ watch(
 </script>
 
 <template>
-  <body>
-    <main>
+  <main>
+    <div class="calculator">
       <form @submit.prevent="submitForm">
         <div class="top">
           <h1>Mortgage Calculator</h1>
@@ -135,13 +135,16 @@ watch(
 
         <label for="amount">
           Mortgage Amount
-          <div class="amount-box" :class="{ 'error-box': isSubmitted && errors.amount }">
-            <span class="prefix" :class="{ 'error-prefix-sufix': isSubmitted && errors.amount }">£</span>
-            <input
-              id="amount"
-              type="text"
-              @input="handleAmountInput"
-            />
+          <div
+            class="amount-box"
+            :class="{ 'error-box': isSubmitted && errors.amount }"
+          >
+            <span
+              class="prefix"
+              :class="{ 'error-prefix-sufix': isSubmitted && errors.amount }"
+              >£</span
+            >
+            <input id="amount" type="text" @input="handleAmountInput" />
           </div>
           <span class="error" v-if="isSubmitted && errors.amount">
             {{ errors.amount }}
@@ -151,14 +154,21 @@ watch(
         <div class="side">
           <label for="term">
             Mortgage Term
-            <div class="term-box" :class="{ 'error-box': isSubmitted && errors.term }">
+            <div
+              class="term-box"
+              :class="{ 'error-box': isSubmitted && errors.term }"
+            >
               <input
                 id="term"
                 type="number"
                 v-model="calculatorData.term"
                 @input="handleTermInput"
               />
-              <span class="sufix" :class="{ 'error-prefix-sufix': isSubmitted && errors.term }">years</span>
+              <span
+                class="sufix"
+                :class="{ 'error-prefix-sufix': isSubmitted && errors.term }"
+                >years</span
+              >
             </div>
             <span class="error" v-if="isSubmitted && errors.term">
               {{ errors.term }}
@@ -167,14 +177,21 @@ watch(
 
           <label for="rate">
             Interest Rate
-            <div class="rate-box" :class="{ 'error-box': isSubmitted && errors.rate }">
+            <div
+              class="rate-box"
+              :class="{ 'error-box': isSubmitted && errors.rate }"
+            >
               <input
                 id="rate"
                 type="number"
                 step="any"
                 v-model="calculatorData.rate"
               />
-              <span class="sufix" :class="{ 'error-prefix-sufix': isSubmitted && errors.rate }">%</span>
+              <span
+                class="sufix"
+                :class="{ 'error-prefix-sufix': isSubmitted && errors.rate }"
+                >%</span
+              >
             </div>
             <span class="error" v-if="isSubmitted && errors.rate">
               {{ errors.rate }}
@@ -221,18 +238,24 @@ watch(
         </div>
 
         <div class="submit-button">
-          <img src="./assets/images/icon-calculator.svg" />
+          <img
+            src="./assets/images/icon-calculator.svg"
+            alt="Icon Calculator"
+          />
           <input class="submit" type="submit" value="Calculate Repayments" />
         </div>
       </form>
 
       <section class="no-results" v-if="!isValidated">
-        <img src="./assets/images/illustration-empty.svg" />
+        <img
+          src="./assets/images/illustration-empty.svg"
+          alt="Illustration Empty"
+        />
         <h1>Results shown here</h1>
 
         <p>
-          Complete the form and click “calculate repayments” to
-          see what your monthly repayments would be.
+          Complete the form and click “calculate repayments” to see what your
+          monthly repayments would be.
         </p>
       </section>
 
@@ -240,8 +263,9 @@ watch(
         <div class="results-intro">
           <h1>Your results</h1>
           <p>
-            Your results are shown below based on the information you provided. 
-            To adjust the results, edit the form and click “calculate repayments” again.
+            Your results are shown below based on the information you provided.
+            To adjust the results, edit the form and click “calculate
+            repayments” again.
           </p>
         </div>
 
@@ -256,8 +280,8 @@ watch(
           </div>
         </div>
       </section>
-    </main>
-  </body>
+    </div>
+  </main>
 </template>
 
 <style>
@@ -301,39 +325,49 @@ main {
   align-items: center;
 }
 
+.calculator {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+}
+
 form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: clamp(500px, calc(57% + 1vh), 700px);
-  width: clamp(500px, calc(29% + 1vw), 50%);
+  width: max(400px, calc(37% + 1vw));
+  max-width: 40%;
   background-color: hsl(0, 0%, 100%);
   border-radius: 20px 20px 0 20px;
   resize: none;
   box-sizing: border-box;
-  padding: 1% 7% 0 2%;
+  padding: 1% 10% 0 2%;
+  position: relative;
+  left: 3vw;
 }
 
 .top {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: top;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 35px;
   position: relative;
   top: 1vh;
 }
 
 .top h1 {
   font-size: 1.5rem;
+  margin-top: 10px;
 }
 
 .top p {
-  align-items: center;
+  align-self: center;
   text-decoration: underline;
   color: hsl(200, 24%, 40%);
   cursor: pointer;
-  padding-top: 5px;
+  margin-top: 10px;
 }
 
 .top p:hover {
@@ -346,7 +380,7 @@ label {
 }
 
 input {
-  font-weight: 500;
+  font-weight: 700;
   width: 100%;
   height: 90%;
 }
@@ -474,6 +508,7 @@ input {
   box-sizing: border-box;
   gap: 10px;
   color: hsl(202, 55%, 16%);
+  font-weight: 700;
   cursor: pointer;
   transition: background-color 0.5s;
 }
@@ -552,12 +587,12 @@ section {
   justify-content: center;
   align-items: center;
   margin: 0;
-  height: clamp(500px, calc(57% + 1vh), 700px);
-  width: clamp(400px, calc(25% + 1vw), 40%);
+  width: max(480px, calc(32% + 1vw));
+  max-width: 40%;
   background-color: hsl(202, 55%, 16%);
-  border-radius: 0 20px 20px 60px;
+  border-radius: 0 20px 20px 80px;
   position: relative;
-  right: 4vw;
+  right: 3vw;
   z-index: 2;
   padding: 30px;
   resize: none;
@@ -571,6 +606,7 @@ section {
 .results h1 {
   color: hsl(0, 0%, 100%);
   font-size: 1.5rem;
+  margin-top: 0;
 }
 
 .results p {
@@ -582,11 +618,10 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: hsl(202, 55%, 10%);
+  background-color: hsl(202, 55%, 13%);
   border-top: 5px solid hsl(61, 70%, 52%);
   border-radius: 7px;
   width: 100%;
-  height: 30vh;
   margin: 0 auto 5vh;
   resize: none;
   box-sizing: border-box;
@@ -608,7 +643,7 @@ section {
 
 .monthlyRepay h2 {
   color: hsl(61, 70%, 52%);
-  font-size: 4rem;
+  font-size: 3.2rem;
   padding: 0;
   margin: 0;
 }
@@ -622,6 +657,10 @@ section {
   font-size: 1.5rem;
   margin: 0;
   margin-bottom: 20px;
+}
+
+.totalRepay p {
+  margin: 5px 0 7px;
 }
 
 .no-results {
@@ -693,13 +732,20 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 0;
   }
 
-  form, section {
+  .calculator {
+    flex-direction: column;
+  }
+
+  form,
+  section {
     width: 100%;
+    max-width: 100%;
     border-radius: 0;
     margin: 0;
   }
 
   form {
+    position: inherit;
     padding: 30px 25px 0;
     height: auto;
   }
@@ -712,8 +758,10 @@ input[type="number"]::-webkit-outer-spin-button {
     top: 0;
   }
 
-  .top h1, .top p {
+  .top h1,
+  .top p {
     margin: 0;
+    align-self: auto;
   }
 
   .side {
@@ -721,7 +769,10 @@ input[type="number"]::-webkit-outer-spin-button {
     gap: 0;
   }
 
-  .radio-container, .submit, .prefix, .sufix {
+  .radio-container,
+  .submit,
+  .prefix,
+  .sufix {
     font-weight: 700;
   }
 
@@ -757,7 +808,8 @@ input[type="number"]::-webkit-outer-spin-button {
     font-size: 2rem;
   }
 
-  .results h1, .results h3, 
+  .results h1,
+  .results h3,
   .no-results h1 {
     font-size: 1.3rem;
   }
